@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Lmikoto
 subtitle: ''
 description: ''
 keywords:
 author: lmikoto
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://lmikoto.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -99,3 +99,15 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: ''
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+excerpt:
+  depth: 2
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
