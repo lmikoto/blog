@@ -6,3 +6,15 @@ tags: ['java','spring-boot']
 ---
 
 
+## 定义抽象策略类
+
+```java
+public interface MessageConsumer {
+
+    String tagName();
+
+    Boolean consume(String payload);
+
+}
+```
+
