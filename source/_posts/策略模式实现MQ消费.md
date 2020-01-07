@@ -64,3 +64,45 @@ public class BMessageConsumer implements MessageConsumer {
 #### 将具体的策略放进map里，当有事件过来的根据tag获取策略bean进行消费
 将策略放进map里，并且提供根据tag获取策略的方法。
 
+```java
+@Component
+public class MessageConsumerRegistry implements ApplicationContextAware {
+
+    private Map<String,MessageConsumer> messageConsumerMap;
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException {
+        // 获取所有的策略
+        Map<String,MessageConsumer> beanMap = context.getBeansOfType(MessageConsumer.class);
+
+        messageConsumerMap = new ConcurrentHashMap<>();
+        // 生成  tag -> MessageConsumer 的映射
+        beanMap.forEach((k,v)->{
+            messageConsumerMap.put(v.tagName(),v);
+        });
+
+    }
+
+    public MessageConsumer getMessageConsumer(String tag){
+        return Optional.ofNullable(messageConsumerMap.get(tag))
+                .orElseThrow(()->new RuntimeException("fail to get consumer" + tag));
+    }
+}
+```
+
+根据tag获取对应的bean进行消费
+
+```java
+try { 
+    MessageConsumer messageConsumer = messageConsumerRegistry.getMessageConsumer(tag); 
+    Boolean result = messageConsumer.consume(payload);
+    if(Objects.equals(Boolean.FALSE,result)){
+        throw new RuntimeException("message consume fail");
+    }
+}catch (Exception e){
+    log.error("message consume fail cause {}", Throwables.getStackTraceAsString(e));
+    throw e;
+}
+```
+
+后面如果有需要新增consumer的需求，只需要实现一下MessageConsumer即可。
