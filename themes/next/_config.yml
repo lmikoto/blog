@@ -121,7 +121,7 @@ scheme: Pisces
 # External url should start with http:// or https://
 menu:
   home: / || home
-  #about: /about/ || user
+  tools: /tools/
   tags: /tags/ || tags
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
