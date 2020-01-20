@@ -121,7 +121,7 @@ scheme: Pisces
 # External url should start with http:// or https://
 menu:
   home: / || home
-  tools: /tools/
+  tools: https://lmikoto.github.io/tools || toolbox
   tags: /tags/ || tags
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
