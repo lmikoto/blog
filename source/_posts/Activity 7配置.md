@@ -38,7 +38,7 @@ database-schema-update有四个值
 - drop-create activity启动的时候删表，关闭的时候建表。
 
 #### history-level
-history-level是对于历史数据的保留密度，有四个配置
+history-level是对于历史数据的保留粒度，有四个配置
 
 - none 不保留任何数据。
 - activity 保留流程实例和流程行为。
