@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://lmikoto.github.io
+url: https://www.lmikoto.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -111,3 +111,32 @@ excerpt:
   excerpt_excludes: []
   more_excludes: []
   hideWholePostExcerpts: true
+
+neat_enable: true
+
+neat_html:
+  enable: true
+  exclude:
+
+neat_css:
+  enable: true
+  exclude:
+    - '*.min.css'
+
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
+    - '**/local-search.js'
+    - '**/utils.js'
+    - '**/muse.js'
+    - '**/pisces.js'
+    - '**/next-boot.js'
+    - '**/algolia-search.js'
+    - '**/bookmark.js'
+
+
+
