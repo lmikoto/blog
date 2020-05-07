@@ -12,7 +12,7 @@ deploy:
   repo: lmikoto/lmikoto.github.io
   local_dir: public
   target_branch: master
-  fqdn: https://lmikoto.github.io
+  fqdn: lmikoto.com
   project_name: blog
   email: lmikoto@outlook.com
   name: lmikoto
