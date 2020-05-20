@@ -1,7 +1,7 @@
 ---
 title: Activiti7源码分析(一)获取源码
 date: 2020-05-12 19:46:20
-tags: ['java','activiti']
+tags: ['activiti']
 ---
 首先从github上面下载源码
 ```bash

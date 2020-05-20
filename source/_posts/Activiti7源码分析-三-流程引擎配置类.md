@@ -1,7 +1,7 @@
 ---
 title: Activiti7源码分析(三)-流程引擎配置类
 date: 2020-05-18 11:57:45
-tags: ['java','activiti']
+tags: ['activiti']
 ---
 
 activiti的配置类是`org.activiti.engine.ProcessEngines`,本文主要讨论他的默认实现`getDefaultProcessEngine`

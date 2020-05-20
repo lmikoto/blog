@@ -1,7 +1,7 @@
 ---
 title: Activiti7源码分析(二)Service调用链路
 date: 2020-05-13 09:03:17
-tags: ['java','activiti']
+tags: ['activiti']
 ---
 ## 概要
 Activiti采用命令和指责链作为基础的开发模式。各Service中定义的方法都有相对应的命令对象Cmd。Service把各种请求委托给Cmd。而一个Cmd执行的过程中需要进行一些外围的处理，这些处理过程是一个职责链。

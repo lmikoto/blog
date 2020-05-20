@@ -48,10 +48,10 @@ with open(output,'w') as f:
             tableName = tableInfo[1]
             tableComment = tableInfo[2]
 
-            tableInfoSql = "select c.column_name AS '字段名'," \
-                           "c.column_type AS '数据类型'," \
-                           "c.is_nullable AS '允许为空'," \
-                           "c.column_comment AS '字段说明' FROM information_schema.columns c " \
+            tableInfoSql = "select c.column_name as '字段名'," \
+                           "c.column_type as '数据类型'," \
+                           "c.is_nullable as '允许为空'," \
+                           "c.column_comment as '字段说明' FROM information_schema.columns c " \
                            "inner JOIN information_schema.tables t ON c.table_schema = t.table_schema" \
                            " AND c.table_name = t.table_name" \
                            " WHERE t.table_schema = '"+str(schema)+"' and t.table_name='"+str(tableName)+"'"
