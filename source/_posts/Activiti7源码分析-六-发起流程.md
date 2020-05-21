@@ -80,7 +80,7 @@ ProcessInstance processInstance = createAndStartProcessInstance(processDefinitio
         return processInstance;
     }
 ```
-ProcessInstance（流程实例）、Execution（执行实例)。ProcessInstance是主执行流，继承Execution。当流程中没有分治的时候这两个概念其实是相等的。在activiti中，这种情况下他们的id都会相同。而如果流程中存在分支比如网管，那么在分支口会形成子Execution。
+ProcessInstance（流程实例）、Execution（执行实例)。ProcessInstance是主执行流，继承Execution。当流程中没有分治的时候这两个概念其实是相等的。在activiti中，这种情况下他们的id都会相同。而如果流程中存在分支比，那么在分支口会形成子Execution。
 这里我们点进去看他的方法。首先进行数据组装。
 ```java
 ExecutionEntity processInstanceExecution = executionDataManager.create();
@@ -120,6 +120,17 @@ processInstanceExecution.setStartUserId(authenticatedUserId);
   }
 ```
 这里插入的是ExecutionEntity对象，他对应的表是ACT_RU_EXECUTION。然后返回流程实例id。
+
+回到之前
+```java
+if (startProcessInstance) {
+    CommandContext commandContext = Context.getCommandContext();
+    startProcessInstance(processInstance, commandContext, variables, initialFlowElement, transientVariables);
+}
+```
+如果创建流程实例成功。则启动实例。
+具体的启动实例这里就不展开了。启动实例之后返回流程实例id，至此流程发布结束。
+
 
 
 
