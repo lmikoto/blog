@@ -38,7 +38,7 @@ public IdBlock execute(CommandContext commandContext) {
   return new IdBlock(oldValue, newValue - 1);
 }
 ```
-从代码上很容易开出来，这种方案是在db里面记录了一个next.id的，每次生成2500个id，然后依次发放。
+从代码上很容易看出来，这种方案是在db里面记录了一个next.id的，每次生成2500个id，然后依次发放。
 不过这里有点小坑。getNextId上面有synchronized关键字。保证了在单机模式下这个方法没有并发问题。但是在分布式环境下。这里有并发问题。可能生成出来的id重复。
 
 ### StrongUuidGenerator
