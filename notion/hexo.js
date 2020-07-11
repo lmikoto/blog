@@ -54,6 +54,9 @@ const textBlock = (block) => {
             if(s === 'a'){
                 return `[${text}](${style[0][1]})`
             }
+            if(s === 'c'){
+                return "`" + text + "`";
+            }
         }
         return text;
     });
