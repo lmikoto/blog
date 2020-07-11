@@ -1,18 +1,14 @@
 ---
 title: 使用语雀webhook发布到博客
-date: 2020-01-04T05:02:26.000Z
-tags: "java"
-
+date: 2020-01-04 00:00:00
+tags: ['tool']
 ---
 
-
-整体的部署流程为: 
-在语雀发布文章 -> 触发语雀 webhook -> server接收到文章推送 -> 请求信息中抽取文章内容和必要信息 -> 调用 GitHub api 更新仓库 -> netlify 自动部署 -> 文章在博客发布 
+整体的部署流程为:
+在语雀发布文章 -> 触发语雀 webhook -> server接收到文章推送 -> 请求信息中抽取文章内容和必要信息 -> 调用 GitHub api 更新仓库 -> netlify 自动部署 -> 文章在博客发布
 本文主要描述server的实现过程。
-
-
 ### 接收webhook的推送
-```java
+```Java
 @RestController
 @Slf4j
 public class WebHookController {
@@ -24,12 +20,9 @@ public class WebHookController {
     }
 }
 ```
-
-
 ### 清洗语雀内容
 因为语雀会在markdown中添加一些标签，所有需要清洗掉
-
-```java
+```Java
 private String cleanContent(String content){
     content = content
         .replaceAll("<br \\/>","\n")
@@ -38,13 +31,10 @@ private String cleanContent(String content){
     return content;
 }
 ```
-
-
 ### 图片替换
 虽然语雀现在的图床在外部系统也可以引用，但是保险起见还是把图片下载下来自己存储。
 使用正则表达式把图片获取出来，然后调用github api把图片上传到指定目录，然后把文章中的图片替换成新的路径。
-
-```java
+```Java
 public void uploadToGitHub(String title,String originContent){
     String content = cleanContent(originContent);
     GitHubApi gitHubApi = GitHubApi.getInstance(owner,repo,token);
@@ -82,8 +72,4 @@ public void uploadToGitHub(String title,String originContent){
     gitHubApi.updataRef(createCommitResponse.getSha());
 }
 ```
-
-
-
-完整代码 [https://github.com/lmikoto/yuque-webhook](https://github.com/lmikoto/yuque-webhook)
-
+[完整代码](https://github.com/lmikoto/yuque-webhook)
