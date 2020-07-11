@@ -160,13 +160,13 @@ const buildArticle = async (id) => {
     let result = '';
     const article =  await getArticle(id);
     const { meta, blocks } = article;
-    const { tags, title, createdDate, publish } = meta;
+    const { tags, title, publish, date } = meta;
     const fileName = './source/_posts/' + title + '.md';
     if(publish === 'published'){
         // header
         result += '---\n';
         result += `title: ${title[0]}\n`;
-        result += `date: ${moment(createdDate * 1000).format('YYYY-MM-DD HH:mm:ss')}\n`;
+        result += `date: ${moment(date * 1000).format('YYYY-MM-DD HH:mm:ss')}\n`;
         result += `tags: [${getTags(tags)}]\n`;
         result += '---\n';
         // content
