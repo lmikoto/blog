@@ -29,7 +29,7 @@ const build = async () => {
     const posts = await getPosts();
     if(posts !== null && posts.length > 0){
         for(let i =0; i<posts.length; i++){
-            buildArticle(posts[i].id);
+            await buildArticle(posts[i].id);
         }
     }
 };
