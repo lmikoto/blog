@@ -80,10 +80,10 @@ const imgBlock = (value) => {
         const url = format.display_source;
         const image = base + encodeURIComponent(url);
         downloadFile(image,'./source/images',id + '.png')
-        return `<img width="${format.block_width}" src="${image}">\n`;
+        return `<img width="${format.block_width}" src="/images/${id}.png">\n`;
     } else if (properties !== undefined) {
         const url = properties.source[0][0];
-        return `![${id}](${base + encodeURIComponent(url)})\n`
+        return `![](/images/${id}.png)\n`
     }
 };
 
