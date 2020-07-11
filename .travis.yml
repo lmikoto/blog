@@ -5,7 +5,7 @@ before_deploy:
   - npm run build:notion
   - git add .
   - git commit -m 'ci auto'
-  - git push -f "https://${GITHUB_TOKEN}@github.com/lmikoto/blog.git HEAD:master"
+  - git push -f "https://${GITHUB_TOKEN}@github.com/lmikoto/blog.git" master:master
   - hexo generate
 deploy:
   provider: pages
