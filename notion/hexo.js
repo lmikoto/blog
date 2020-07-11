@@ -46,7 +46,18 @@ const textBlock = (block) => {
     if (properties === undefined || properties.title === undefined) {
         return '\n'
     }
-    return properties.title.map(i => i[0]) + '\n';
+    const result = properties.title.map(i => {
+        let text =  i[0];
+        const style = i[1];
+        if(style !== undefined){
+            const s = style[0][0];
+            if(s === 'a'){
+                return `[${text}](${style[0][1]})`
+            }
+        }
+        return text;
+    });
+    return result.join('') + '\n';
 };
 
 const codeBlock = (properties) => {
