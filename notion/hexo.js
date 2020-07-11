@@ -145,10 +145,10 @@ const buildBlock  = (block,sameTypeCnt) => {
         return codeBlock(properties);
     }
     if(type === 'bulleted_list'){
-        return listBlock(block,0);
+        return listBlock(block,0) + '\n';
     }
     if(type === 'numbered_list'){
-        return numListBlock(block,sameTypeCnt,0);
+        return numListBlock(block,sameTypeCnt,0) + '\n';
     }
     return '';
 };
