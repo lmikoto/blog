@@ -2,13 +2,15 @@ language: node_js
 node_js:
   - "10"
 before_deploy:
+  - npm run build:notion
+  - git add .
+  - git commit -m 'ci auto'
+  - git push -f "https://${GITHUB_TOKEN}@blog"
   - hexo generate
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  on:
-    branch: master
   repo: lmikoto/lmikoto.github.io
   local_dir: public
   target_branch: master

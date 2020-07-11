@@ -1,6 +1,6 @@
 ---
 title: mysql数据字典生成
-date: 2020-05-18 09:48:23
+date: 2020-07-11 14:23:00
 tags: ['tool']
 ---
 ## 背景
@@ -9,7 +9,7 @@ tags: ['tool']
 mysql中的information_schema.tables记录了表的元信息。information_schema.columns记录了字段的元信息。
 ## 实现
 为了方便使用python进行实现。
-```python
+```Python
 import sys
 import pymysql
 
@@ -65,8 +65,8 @@ with open(output,'w') as f:
                 f.write('|' + tableColumn[0] + '|' + tableColumn[1] + '|' + tableColumn[2] + '|' + tableColumn[3] + '|\n')
             f.write("\n")
 ```
-
 使用
-```bash
+```Bash
 python3 db_dict.py 127.0.0.1 root 123456 test
 ```
+
