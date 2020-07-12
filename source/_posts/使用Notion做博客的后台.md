@@ -7,7 +7,7 @@ tags: ['tool']
 最近发现了一个很舒服的工具[notion](https://www.notion.so/)。不但可以记笔记其功能还涵盖了项目管理、wiki、文档等。最主要的是极致的markdown书写体验，让我爱不释手。
 ## 博客现状
 先说一下我改造前的博客现状。
-博客是基于hexo搭建的，使用travis部署在github page上的静态博客。具体可以参考这个[关于本站](https://lmikoto.com/2020/05/07/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/)。平时写博客的时候需要先`hexo new post`，然后在vscode中写，然后push到github上。由travis帮忙构建和发布。
+博客是基于hexo搭建的，使用travis部署在github page上的静态博客。具体可以参考[关于本站](https://lmikoto.com/2020/05/07/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/)。平时写博客的时候需要先`hexo new post`，然后在vscode中写，然后push到github上。由travis帮忙构建和发布。
 这里的短板算是vscode了。因为他并不支持所见即所得编辑。对图片的插入也不是很友好，虽然有插件进行支持。
 ## 改造点
 把写博客的工具由vscode 迁移到notion上来。
