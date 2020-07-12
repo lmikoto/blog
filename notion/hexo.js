@@ -130,7 +130,7 @@ const buildBlock  = (block,sameTypeCnt) => {
         return textBlock(block);
     }
     if (type === 'quote') {
-        return '> ' + textBlock(block);
+        return '> ' + textBlock(block) + '\n';
     }
     if (type === 'header') {
         return '# ' + textBlock(block);
