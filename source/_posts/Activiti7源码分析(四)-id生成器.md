@@ -1,6 +1,6 @@
 ---
 title: Activiti7源码分析(四)-id生成器
-date: 2020-07-19 00:00:00
+date: 2020-05-19 00:00:00
 tags: ['activiti','java']
 ---
 activiti中定义了id生成器的接口，并且提供两个实现。当然你也可以自行实现。
