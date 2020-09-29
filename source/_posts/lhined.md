@@ -1,45 +1,57 @@
 ---
 title: Activiti7源码分析(三)-流程引擎配置类
-date: 2020-05-18 00:00:00
-tags: ['activiti','java']
+urlname: lhined
+date: 2020-09-29 22:05:44 +0800
+tags: []
+categories: []
 ---
-activiti的配置类是`org.activiti.engine.ProcessEngines`,本文主要讨论他的默认实现`getDefaultProcessEngine`
-```Java
-public static ProcessEngine getProcessEngine(String processEngineName) {
-  if (!isInitialized()) {
-    init();
-  }
-  return processEngines.get(processEngineName);
-}
-```
-首先，他会传进去一个default的字符串。
-```Java
-public static ProcessEngine getProcessEngine(String processEngineName) {
-  if (!isInitialized()) {
-    init();
-  }
-  return processEngines.get(processEngineName);
-}
-```
-- 如果没有初始化，走初始化的逻辑
-- 返回processEngines map中的配配置，processEngineName就是上面传过来的default
 
-然后再来看init方法
-```Java
+activiti 的配置类是`org.activiti.engine.ProcessEngines`,本文主要讨论他的默认实现`getDefaultProcessEngine`
+
+```java
+public static ProcessEngine getProcessEngine(String processEngineName) {
+  if (!isInitialized()) {
+    init();
+  }
+  return processEngines.get(processEngineName);
+}
+```
+
+首先，他会传进去一个 default 的字符串。
+
+```java
+public static ProcessEngine getProcessEngine(String processEngineName) {
+  if (!isInitialized()) {
+    init();
+  }
+  return processEngines.get(processEngineName);
+}
+```
+
+- 如果没有初始化，走初始化的逻辑
+- 返回 processEngines map 中的配配置，processEngineName 就是上面传过来的 default
+
+然后再来看 init 方法
+
+````java
 ```java
  public synchronized static void init() {
     // ...
  }
-```
+````
+
 这个方法是个同步方法。
-```Java
+
+```java
 if (!isInitialized()) {
   // ...
 }
 ```
-这里又判断了一次是否初始化，可能有的人觉得这步判断有些多余，因为进入这个方法之前已经判断过了，但是在并发场景下并不多余，两个请求都没有初始化过流程引擎，同时走到init方法，然后其中一个先执行，另一个等待。一个执行完毕之后，另一个进来，发现已经初始化完成了，就不需要再执行了。
-然后，获取activiti的配置文件activiti.cfg，进行初始化,代码如下。
-```Java
+
+这里又判断了一次是否初始化，可能有的人觉得这步判断有些多余，因为进入这个方法之前已经判断过了，但是在并发场景下并不多余，两个请求都没有初始化过流程引擎，同时走到 init 方法，然后其中一个先执行，另一个等待。一个执行完毕之后，另一个进来，发现已经初始化完成了，就不需要再执行了。
+然后，获取 activiti 的配置文件 activiti.cfg，进行初始化,代码如下。
+
+```java
 ClassLoader classLoader = ReflectUtil.getClassLoader();
 Enumeration<URL> resources = null;
 try {
@@ -61,8 +73,10 @@ for (Iterator<URL> iterator = configUrls.iterator(); iterator.hasNext();) {
   initProcessEngineFromResource(resource);
 }
 ```
-首先去获取了一个ClassLoader，这个ClassLoader可以使用默认自带的，也可以使用自定制的。都没问题。然后获取一下配置文件的的位置。对这些位置去重。然后遍历这些url，进行初始化资源。
-```Java
+
+首先去获取了一个 ClassLoader，这个 ClassLoader 可以使用默认自带的，也可以使用自定制的。都没问题。然后获取一下配置文件的的位置。对这些位置去重。然后遍历这些 url，进行初始化资源。
+
+```java
 ProcessEngineInfo processEngineInfo = processEngineInfosByResourceUrl.get(resourceUrl.toString());
 // if there is an existing process engine info
 if (processEngineInfo != null) {
@@ -76,9 +90,11 @@ if (processEngineInfo != null) {
   processEngineInfosByResourceUrl.remove(processEngineInfo.getResourceUrl());
 }
 ```
-这里上来也做了个一个类似去重的操作，因为初始化的过程中可能会失败，会走如 retry方法，这里保证每一个url对应的配置信息只有最后加载的那一个。
+
+这里上来也做了个一个类似去重的操作，因为初始化的过程中可能会失败，会走如 retry 方法，这里保证每一个 url 对应的配置信息只有最后加载的那一个。
 再来看一下构建流程引擎的方法
-```Java
+
+```java
 private static ProcessEngine buildProcessEngine(URL resource) {
     InputStream inputStream = null;
     try {
@@ -93,8 +109,10 @@ private static ProcessEngine buildProcessEngine(URL resource) {
     }
 }
 ```
-使用url构建 输入流。然后传入createProcessEngineConfigurationFromInputStream方法。再来看一下这个方法,然后依次往下找。
-```Java
+
+使用 url 构建 输入流。然后传入 createProcessEngineConfigurationFromInputStream 方法。再来看一下这个方法,然后依次往下找。
+
+```java
 public static ProcessEngineConfiguration parseProcessEngineConfiguration(Resource springResource, String beanName) {
     DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
     XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
@@ -105,10 +123,12 @@ public static ProcessEngineConfiguration parseProcessEngineConfiguration(Resourc
     return processEngineConfiguration;
 }
 ```
-这里的beanname 是 processEngineConfiguration，这里省略了中间步骤。
-这里是使用了spring的方法，把xml的配置转换成bean。
-然后回到buildProcessEngine
-```Java
+
+这里的 beanname 是 processEngineConfiguration，这里省略了中间步骤。
+这里是使用了 spring 的方法，把 xml 的配置转换成 bean。
+然后回到 buildProcessEngine
+
+```java
 public ProcessEngine buildProcessEngine() {
   init();
   ProcessEngineImpl processEngine = new ProcessEngineImpl(this);
@@ -117,9 +137,11 @@ public ProcessEngine buildProcessEngine() {
   return processEngine;
 }
 ```
+
 这里也很好懂。
-调用init方法，这个init方法就是上一篇中的那个init。在这里初始化了activiti的资源，包括上篇提到的命令执行器，和职责链，各种service
-```Java
+调用 init 方法，这个 init 方法就是上一篇中的那个 init。在这里初始化了 activiti 的资源，包括上篇提到的命令执行器，和职责链，各种 service
+
+```java
 initConfigurators();
 configuratorsBeforeInit();
 initHistoryLevel();
@@ -171,9 +193,11 @@ initProcessValidator();
 initDatabaseEventLogging();
 configuratorsAfterInit();
 ```
+
 里面一些比较重要的，后面会进行讨论，这里就不进行展开了。
 回到之前方法
-```Java
+
+```java
 try {
   resources = classLoader.getResources("activiti-context.xml");
 } catch (IOException e) {
@@ -185,9 +209,11 @@ while (resources.hasMoreElements()) {
   initProcessEngineFromSpringResource(resource);
 }
 ```
-activiti也支持Spring风格的初始化。这里获取了activiti-context.xml，然后调用initProcessEngineFromSpringResource初始化资源。
-来看一下initProcessEngineFromSpringResource
-```Java
+
+activiti 也支持 Spring 风格的初始化。这里获取了 activiti-context.xml，然后调用 initProcessEngineFromSpringResource 初始化资源。
+来看一下 initProcessEngineFromSpringResource
+
+```java
 try {
     Class<?> springConfigurationHelperClass = ReflectUtil.loadClass("org.activiti.spring.SpringConfigurationHelper");
     Method method = springConfigurationHelperClass.getDeclaredMethod("buildProcessEngine", new Class<?>[] { URL.class });
@@ -202,8 +228,10 @@ try {
     throw new ActivitiException("couldn't initialize process engine from spring configuration resource " + resource.toString() + ": " + e.getMessage(), e);
   }
 ```
-通过反射调用SpringConfigurationHelper的buildProcessEngine方法。来看一下这个方法。
-```Java
+
+通过反射调用 SpringConfigurationHelper 的 buildProcessEngine 方法。来看一下这个方法。
+
+```java
 public static ProcessEngine buildProcessEngine(URL resource) {
   log.debug("==== BUILDING SPRING APPLICATION CONTEXT AND PROCESS ENGINE =========================================");
 
@@ -219,5 +247,6 @@ public static ProcessEngine buildProcessEngine(URL resource) {
   return processEngine;
   }
 ```
-好的。activiti的配置类分析到此就结束了。
-简单总结一下，activiti配置类主要的工作就是做一些配置的初始化工作，支持activiti风格的配置和spring风格的配置。
+
+好的。activiti 的配置类分析到此就结束了。
+简单总结一下，activiti 配置类主要的工作就是做一些配置的初始化工作，支持 activiti 风格的配置和 spring 风格的配置。

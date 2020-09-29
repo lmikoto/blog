@@ -1,17 +1,23 @@
 ---
 title: Activiti7源码分析(六)-发起流程
-date: 2020-05-20 00:00:00
-tags: ['activiti','java']
+urlname: ibxg7i
+date: 2020-09-29 22:08:35 +0800
+tags: []
+categories: []
 ---
-发起流程是service都在runtimeService中。Service的调用链路可以看之前的文章。这里直接从cmd开始。
+
+发起流程是 service 都在 runtimeService 中。Service 的调用链路可以看之前的文章。这里直接从 cmd 开始。
 发起流程肯定要获取这个流程是怎么定义的。
+
 ```Java
 DeploymentManager deploymentCache = commandContext.getProcessEngineConfiguration().getDeploymentManager();
 
 ProcessDefinitionRetriever processRetriever = new ProcessDefinitionRetriever(this.tenantId, deploymentCache);
 ProcessDefinition processDefinition = processRetriever.getProcessDefinition(this.processDefinitionId, this.processDefinitionKey);
 ```
-看一下getProcessDefinition的实现
+
+看一下 getProcessDefinition 的实现
+
 ```Java
 if (processDefinitionId == null && processDefinitionKey == null) {
       throw new ActivitiIllegalArgumentException("processDefinitionKey and processDefinitionId are null");
@@ -29,12 +35,14 @@ if (processDefinitionId == null && processDefinitionKey == null) {
 
   return processDefinition;
 ```
-这里先简单介绍一下processDefinitionId、processDefinitionKey吧。processDefinitionId是流程图的唯一标示。每次修改流程图，新的流程图都会和之前的不一样。而processDefinitionKey是创建图的时候会新建一个，而之后修改都不会变动。
-调用这个cmd的方法，有的会把这两个都传过来，有的只会传一个，所以这里会有一些判断。
-由于processDefinitionId是唯一的，所以他这里会先判断有没有processDefinitionId，如果有的话用processDefinitionId从缓存中找流程定义。如果没有的话，再用processDefinitionKey从缓存中找。
-这里其实有点小坑。如果在多实例的情况下，使用默认的缓存机制及内存缓存。如果更新了定义，不同实例的缓存是不会同步的。如果是用processDefinitionKey为依据去发起流程的话，可能会由于缓存没同步而造成事故。
-针对这个坑点，发起实例尽量用processDefinitionId来发起，或者使用中间键作为缓存。
-我们继续。这里会尝试从缓存中拿。如果拿不到就从db中拿。代码如下
+
+这里先简单介绍一下 processDefinitionId、processDefinitionKey 吧。processDefinitionId 是流程图的唯一标示。每次修改流程图，新的流程图都会和之前的不一样。而 processDefinitionKey 是创建图的时候会新建一个，而之后修改都不会变动。
+调用这个 cmd 的方法，有的会把这两个都传过来，有的只会传一个，所以这里会有一些判断。
+由于 processDefinitionId 是唯一的，所以他这里会先判断有没有 processDefinitionId，如果有的话用 processDefinitionId 从缓存中找流程定义。如果没有的话，再用 processDefinitionKey 从缓存中找。
+这里其实有点小坑。如果在多实例的情况下，使用默认的缓存机制及内存缓存。如果更新了定义，不同实例的缓存是不会同步的。如果是用 processDefinitionKey 为依据去发起流程的话，可能会由于缓存没同步而造成事故。
+针对这个坑点，发起实例尽量用 processDefinitionId 来发起，或者使用中间键作为缓存。
+我们继续。这里会尝试从缓存中拿。如果拿不到就从 db 中拿。代码如下
+
 ```Java
 public ProcessDefinition findDeployedProcessDefinitionById(String processDefinitionId) {
     if (processDefinitionId == null) {
@@ -55,11 +63,15 @@ public ProcessDefinition findDeployedProcessDefinitionById(String processDefinit
     return processDefinition;
   }
 ```
+
 拿到流程定义之后，发起流程
+
 ```Java
 ProcessInstance processInstance = createAndStartProcessInstance(processDefinition, businessKey, processInstanceName, variables, transientVariables);
 ```
+
 点进去这个，然后向下追踪
+
 ```Java
 public ExecutionEntity createProcessInstanceWithInitialFlowElement(ProcessDefinition processDefinition,
                                                                        String businessKey,
@@ -78,8 +90,10 @@ public ExecutionEntity createProcessInstanceWithInitialFlowElement(ProcessDefini
         return processInstance;
     }
 ```
-ProcessInstance（流程实例）、Execution（执行实例)。ProcessInstance是主执行流，继承Execution。当流程中没有分治的时候这两个概念其实是相等的。在activiti中，这种情况下他们的id都会相同。而如果流程中存在分支比，那么在分支口会形成子Execution。
+
+ProcessInstance（流程实例）、Execution（执行实例)。ProcessInstance 是主执行流，继承 Execution。当流程中没有分治的时候这两个概念其实是相等的。在 activiti 中，这种情况下他们的 id 都会相同。而如果流程中存在分支比，那么在分支口会形成子 Execution。
 这里我们点进去看他的方法。首先进行数据组装。
+
 ```Java
 ExecutionEntity processInstanceExecution = executionDataManager.create();
 
@@ -104,7 +118,9 @@ String authenticatedUserId = Authentication.getAuthenticatedUserId();
 
 processInstanceExecution.setStartUserId(authenticatedUserId);
 ```
-插入数据库,这里可以看到 流程实例执行的时候会抛两个事件，ENTITY_CREATED、ENTITY_INITIALIZED可以接一下用于定制化需求。
+
+插入数据库,这里可以看到 流程实例执行的时候会抛两个事件，ENTITY_CREATED、ENTITY_INITIALIZED 可以接一下用于定制化需求。
+
 ```Java
 public void insert(EntityImpl entity, boolean fireCreateEvent) {
     getDataManager().insert(entity);
@@ -116,13 +132,16 @@ public void insert(EntityImpl entity, boolean fireCreateEvent) {
     }
   }
 ```
-这里插入的是ExecutionEntity对象，他对应的表是ACT_RU_EXECUTION。然后返回流程实例id。
+
+这里插入的是 ExecutionEntity 对象，他对应的表是 ACT_RU_EXECUTION。然后返回流程实例 id。
 回到之前
+
 ```Java
 if (startProcessInstance) {
     CommandContext commandContext = Context.getCommandContext();
     startProcessInstance(processInstance, commandContext, variables, initialFlowElement, transientVariables);
 }
 ```
+
 如果创建流程实例成功。则启动实例。
-具体的启动实例这里就不展开了。启动实例之后返回流程实例id，至此流程发布结束。
+具体的启动实例这里就不展开了。启动实例之后返回流程实例 id，至此流程发布结束。

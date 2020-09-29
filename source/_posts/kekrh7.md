@@ -1,13 +1,20 @@
 ---
 title: Activiti7源码分析(二)-Service调用链路
-date: 2020-05-13 00:00:00
-tags: ['activiti','java']
+urlname: kekrh7
+date: 2020-09-29 22:04:57 +0800
+tags: []
+categories: []
 ---
+
 ## 概要
-Activiti采用命令和指责链作为基础的开发模式。各Service中定义的方法都有相对应的命令对象Cmd。Service把各种请求委托给Cmd。而一个Cmd执行的过程中需要进行一些外围的处理，这些处理过程是一个职责链。
+
+Activiti 采用命令和指责链作为基础的开发模式。各 Service 中定义的方法都有相对应的命令对象 Cmd。Service 把各种请求委托给 Cmd。而一个 Cmd 执行的过程中需要进行一些外围的处理，这些处理过程是一个职责链。
+
 ## 初始化
-从流程引擎的配置实现类`ProcessEngineConfigurationImpl`为入口进入。init方法
-```Java
+
+从流程引擎的配置实现类`ProcessEngineConfigurationImpl`为入口进入。init 方法
+
+```java
 public void init() {
   // ...
 
@@ -16,8 +23,10 @@ public void init() {
   // ...
 }
 ```
+
 `initCommandExecutors`中会出事一些配置，比较重要的是最后两个。
-```Java
+
+```java
 public void initCommandExecutors() {
   initDefaultCommandConfig();
   initSchemaCommandConfig();
@@ -28,8 +37,10 @@ public void initCommandExecutors() {
   initCommandExecutor();
 }
 ```
+
 首先来看`initCommandInterceptors`
-```Java
+
+```java
 public void initCommandInterceptors() {
   if (commandInterceptors == null) {
     commandInterceptors = new ArrayList<CommandInterceptor>();
@@ -44,14 +55,17 @@ public void initCommandInterceptors() {
   }
 }
 ```
-可以看到这个方法主要做了四个事情。
-1. 如果定制了前置拦截器则加入。
-2. 添加activiti默认的拦截器。
-3. 如果定制后置拦截器则加入。
-4. 把命令执行期添加在链条的最后一环。
 
-来看一下Activiti的默认拦截器
-```Java
+可以看到这个方法主要做了四个事情。
+
+1. 如果定制了前置拦截器则加入。
+1. 添加 activiti 默认的拦截器。
+1. 如果定制后置拦截器则加入。
+1. 把命令执行期添加在链条的最后一环。
+
+来看一下 Activiti 的默认拦截器
+
+```java
 public Collection<? extends CommandInterceptor> getDefaultCommandInterceptors() {
   List<CommandInterceptor> interceptors = new ArrayList<CommandInterceptor>();
   interceptors.add(new LogInterceptor());
@@ -72,9 +86,11 @@ public Collection<? extends CommandInterceptor> getDefaultCommandInterceptors() 
   return interceptors;
 }
 ```
-activiti默认添加三个拦截器及 日志拦截器、commandContext拦截器、事物拦截器。
+
+activiti 默认添加三个拦截器及 日志拦截器、commandContext 拦截器、事物拦截器。
 再来看`initCommandExecutor`
-```Java
+
+```java
 public void initCommandExecutor() {
   if (commandExecutor == null) {
     CommandInterceptor first = initInterceptorChain(commandInterceptors);
@@ -82,28 +98,35 @@ public void initCommandExecutor() {
   }
 }
 ```
+
 这个方法把之间的所有链的节点穿起来。形成了一个职责链,首节点为`first`。
 然后初始化了`commandExecutor`
-那么这个执行器是如何初始化到service里
-```Java
+那么这个执行器是如何初始化到 service 里
+
+```java
 public void initService(Object service) {
   if (service instanceof ServiceImpl) {
     ((ServiceImpl) service).setCommandExecutor(commandExecutor);
   }
 }
 ```
-## Service调用
-下面就来说一下Service调用。
+
+## Service 调用
+
+下面就来说一下 Service 调用。
 以删除任务的`deleteTask`为例
-```Java
+
+```java
 @Override
 public void deleteTask(String taskId, String deleteReason) {
   commandExecutor.execute(new DeleteTaskCmd(taskId, deleteReason, false));
 }
 ```
-这里使用命令执行期执行Cmd。
-看下命令执行器内部的实现，其实就是调用了职责链去执行这个Cmd，代码如下。
-```Java
+
+这里使用命令执行期执行 Cmd。
+看下命令执行器内部的实现，其实就是调用了职责链去执行这个 Cmd，代码如下。
+
+```java
 @Override
 public <T> T execute(Command<T> command) {
   return execute(defaultConfig, command);
@@ -114,8 +137,10 @@ public <T> T execute(CommandConfig config, Command<T> command) {
   return first.execute(config, command);
 }
 ```
+
 上文我们说了，整个拦截器职责链的最后一环是`commandInvoker`,那么来看一下这个的实现
-```Java
+
+```java
 @Override
 @SuppressWarnings("unchecked")
 public <T> T execute(final CommandConfig config, final Command<T> command) {
@@ -143,9 +168,11 @@ public <T> T execute(final CommandConfig config, final Command<T> command) {
   return (T) commandContext.getResult();
 }
 ```
-也就是说实际上是在commandInvoker中调用Cmd的execute方法来执行的操作。
-再来看一下Cmd中的execute
-```Java
+
+也就是说实际上是在 commandInvoker 中调用 Cmd 的 execute 方法来执行的操作。
+再来看一下 Cmd 中的 execute
+
+```java
 public Void execute(CommandContext commandContext) {
   if (taskId != null) {
     deleteTask(commandContext, taskId);
@@ -160,8 +187,10 @@ public Void execute(CommandContext commandContext) {
   return null;
 }
 ```
-看一下deleteTask的实现，然后依次往里面找。
-```Java
+
+看一下 deleteTask 的实现，然后依次往里面找。
+
+```java
 @Override
 public void deleteTask(TaskEntity task, String deleteReason, boolean cascade, boolean cancel) {
   if (!task.isDeleted()) {
@@ -209,6 +238,6 @@ public void deleteTask(TaskEntity task, String deleteReason, boolean cascade, bo
   }
 }
 ```
-这个方法里面其实还是做了很多事情的。包括activiti的分表机制，和事件机制。这些机制后面的文章再讨论。
-再往下找就是mybatis层了。至此从activiti的service层到db层的调用链路分析完毕了。从整体层面上来看，activiti的这种架构方式十分有利于代码的可读性，还是十分有学习的意义。
 
+这个方法里面其实还是做了很多事情的。包括 activiti 的分表机制，和事件机制。这些机制后面的文章再讨论。
+再往下找就是 mybatis 层了。至此从 activiti 的 service 层到 db 层的调用链路分析完毕了。从整体层面上来看，activiti 的这种架构方式十分有利于代码的可读性，还是十分有学习的意义。

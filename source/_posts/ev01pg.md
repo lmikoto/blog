@@ -1,20 +1,28 @@
 ---
 title: Activiti7源码分析(四)-id生成器
-date: 2020-05-19 00:00:00
-tags: ['activiti','java']
+urlname: ev01pg
+date: 2020-09-29 22:06:38 +0800
+tags: []
+categories: []
 ---
-activiti中定义了id生成器的接口，并且提供两个实现。当然你也可以自行实现。
-```Java
+
+activiti 中定义了 id 生成器的接口，并且提供两个实现。当然你也可以自行实现。
+
+```java
 public interface IdGenerator {
 
   String getNextId();
 
 }
 ```
+
 我们来看一下这个接口的两个实现。
+
 ### DbIdGenerator
-DbIdGenerator是activiti的IdGenerator默认实现。
-```Java
+
+DbIdGenerator 是 activiti 的 IdGenerator 默认实现。
+
+```java
 public synchronized String getNextId() {
   if (lastId < nextId) {
     getNewBlock();
@@ -37,10 +45,13 @@ public IdBlock execute(CommandContext commandContext) {
   return new IdBlock(oldValue, newValue - 1);
 }
 ```
-从代码上很容易看出来，这种方案是在db里面记录了一个next.id的，每次生成2500个id，然后依次发放。
-不过这里有点小坑。getNextId上面有synchronized关键字。保证了在单机模式下这个方法没有并发问题。但是在分布式环境下。这里有并发问题。可能生成出来的id重复。
+
+从代码上很容易看出来，这种方案是在 db 里面记录了一个 next.id 的，每次生成 2500 个 id，然后依次发放。
+不过这里有点小坑。getNextId 上面有 synchronized 关键字。保证了在单机模式下这个方法没有并发问题。但是在分布式环境下。这里有并发问题。可能生成出来的 id 重复。
+
 ### StrongUuidGenerator
-```Java
+
+```java
 protected void ensureGeneratorInitialized() {
   if (timeBasedGenerator == null) {
     synchronized (StrongUuidGenerator.class) {
@@ -51,4 +62,5 @@ protected void ensureGeneratorInitialized() {
   }
 }
 ```
-这里是用jackson里面的uuid生成方法。而且也把机器环境传入进去了，这种id生成策略是不会有上面那个方法的分布式id重复问题。
+
+这里是用 jackson 里面的 uuid 生成方法。而且也把机器环境传入进去了，这种 id 生成策略是不会有上面那个方法的分布式 id 重复问题。

@@ -10,10 +10,11 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "test": "echo 1",
-    "c": "hexo new post"
+    "c": "hexo new post",
+    "yuque:build": "yuque-hexo sync"
   },
   "hexo": {
-    "version": "4.2.0"
+    "version": "4.2.1"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -30,6 +31,15 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
-    "kind-of": "6.0.3"
+    "kind-of": "6.0.3",
+    "yuque-hexo": "^1.6.5"
+  },
+  "yuqueConfig": {
+    "baseUrl": "https://www.yuque.com/api/v2",
+    "login": "lmikoto",
+    "repo": "lmikoto",
+    "mdNameFormat": "slug",
+    "postPath": "source/_posts",
+    "onlyPublished": true
   }
 }
