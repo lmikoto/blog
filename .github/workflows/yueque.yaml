@@ -20,10 +20,8 @@ jobs:
            npm install
            npm run build
         - name: Deploy
-          uses: peaceiris/actions-gh-pages@v3
+          uses: Cecilapp/GitHub-Pages-deploy@2.0.0
           with:
-            deploy_key: ${{ secrets.SSH_KEY }}
-            external_repository: lmikoto/lmikoti.github.io
-            publish_branch: master
-            publish_dir: ./public
-            commit_message: "ci auto publish"
+            GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            EMAIL: lmikoto@outlook.com
+            BUILD_DIR: public
