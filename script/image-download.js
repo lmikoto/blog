@@ -37,7 +37,17 @@ const donwload = async () => {
       fs.writeFileSync(postPath,newContent);
     }
   });
+
+  const keys = Object.keys(imageUseMap);
+  keys.forEach(key=>{
+    const use = imageUseMap[key];
+    if(!use){
+      console.log('delete',key)
+      fs.unlinkSync(imagePath + "/" + key)
+    }
+  })
   
 }
+
 
 donwload();
