@@ -27,7 +27,7 @@ public class WebHookController {
 
 ### 清洗语雀内容
 
-因为语雀会在 markdown 中添加一些标签，所有需要清洗掉
+因为语雀会在`markdown`中添加一些标签，所有需要清洗掉
 
 ```java
 private String cleanContent(String content){
@@ -42,7 +42,7 @@ private String cleanContent(String content){
 ### 图片替换
 
 虽然语雀现在的图床在外部系统也可以引用，但是保险起见还是把图片下载下来自己存储。
-使用正则表达式把图片获取出来，然后调用 github api 把图片上传到指定目录，然后把文章中的图片替换成新的路径。
+使用正则表达式把图片获取出来，然后调用`github api`把图片上传到指定目录，然后把文章中的图片替换成新的路径。
 
 ```java
 public void uploadToGitHub(String title,String originContent){
