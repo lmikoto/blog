@@ -7,6 +7,12 @@ const ignoreFile = ['.DS_Store'];
 const imagePattern = /!\[(.*?)]\((.*?)\)/g;
 
 
+const getName = (url) =>{
+  const start = url.lastIndexOf("\/");
+  const end = url.indexOf("#");
+  return url.substring(start + 1,end);
+}
+
 const donwload = async () => {
   const imageList = fs.readdirSync(imagePath).filter(i=>!ignoreFile.includes(i));
   const imageUseMap = {};
@@ -22,8 +28,8 @@ const donwload = async () => {
     let match = postContent.match(imagePattern);
     let newContent = postContent;
     while(match = imagePattern.exec(postContent)){
-      const name = match[1];
       const url = match[2];
+      const name = getName(url);
       const imageExist = imageUseMap.hasOwnProperty(name);
       if(!imageExist && url.startsWith("http")){
         console.log("dlownload image",name,url);
