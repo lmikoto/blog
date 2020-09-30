@@ -1,0 +1,29 @@
+name: Deploy To Github Pages
+on: [repository_dispatch]
+jobs: 
+  deploy:
+     name: Deploy Hexo Public To Pages 
+     runs-on: ubuntu-latest
+     env: 
+        TZ: Asia/Shanghai
+     steps:
+        - name: Checkout Repository master branch
+          uses: actions/checkout@master
+        - name: Setup Node.js 10.x
+          uses: actions/setup-node@master
+          with:
+            node-version: "10.x"
+        - name: Setup Hexo Dependencies and Generate Public Files
+          env:
+            YUQUE_TOKEN: ${{ secrets.YUQUE_TOKEN }}
+          run: |
+           npm install
+           npm run build
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            deploy_key: ${{ secrets.Github_SSH_PRIVATE_KEY }}
+            external_repository: lmikoto/lmikoti.github.io
+            publish_branch: master
+            publish_dir: ./public
+            commit_message: "ci auto publish"
