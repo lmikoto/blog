@@ -19,7 +19,7 @@ git branch my v7.1.224
 ```
 
 来简单的看一下 activiti 的项目结构
-![55c83a90-df34-49d2-9dbc-e7fdbcdfe676.png](https://cdn.nlark.com/yuque/0/2020/png/328252/1601388229950-3c381d63-239a-4fed-8771-56d2b23d855a.png#align=left&display=inline&height=274&margin=%5Bobject%20Object%5D&name=55c83a90-df34-49d2-9dbc-e7fdbcdfe676.png&originHeight=274&originWidth=720&size=82660&status=done&style=none&width=720)
+![55c83a90-df34-49d2-9dbc-e7fdbcdfe676.png](/images/1601388229950-3c381d63-239a-4fed-8771-56d2b23d855a.png)
 
 - activiti-api 接口定义
 - activiti-core 流程引擎核心实现
