@@ -20,9 +20,9 @@ jobs:
            npm install
            npm run build
         - name: Deploy
-          uses: JamesIves/github-pages-deploy-action@3.6.2
+          uses: peaceiris/actions-gh-pages@v2.5.1
           with:
-            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-            REPOSITORY_NAME: lmikoto/lmikoto.github.io
-            FOLDER: public
-            BRANCH: master
+            ACTIONS_DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+            EXTERNAL_REPOSITORY: lmikoto/lmikoto.github.io
+            PUBLISH_DIR: ./public
+            PUBLISH_BRANCH: master
