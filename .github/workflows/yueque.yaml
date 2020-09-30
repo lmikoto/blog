@@ -16,9 +16,14 @@ jobs:
         - name: Setup Hexo Dependencies and Generate Public Files
           env:
             YUQUE_TOKEN: ${{ secrets.YUQUE_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN  }}
           run: |
            npm install
-           npm run build
+           npm run yuque:build
+           npm run image:download
+           git add .
+           git commit -m 'ci auto'
+           git push -f "https://${GITHUB_TOKEN}@github.com/lmikoto/blog.git" HEAD:master
         - name: Deploy
           uses: peaceiris/actions-gh-pages@v2.5.1
           env:
