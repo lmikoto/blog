@@ -20,8 +20,9 @@ jobs:
            npm install
            npm run build
         - name: Deploy
-          uses: Cecilapp/GitHub-Pages-deploy@2.0.0
+          uses: JamesIves/github-pages-deploy-action@releases/v3
           with:
-            GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-            EMAIL: lmikoto@outlook.com
-            BUILD_DIR: public
+            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            REPOSITORY_NAME: lmikoto/lmikoto.github.io
+            FOLDER: public
+            BRANCH: master
