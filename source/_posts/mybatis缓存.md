@@ -12,7 +12,11 @@ Mybatis 分为一级缓存和二级缓存
 
 - 一级缓存是 sqlSession 级别。不同的 sqlSession 之间的缓存区域互不影响。
 - 默认是开启的。
-- 缓存的 key 由 statementId,params,boundSql,rowBounds 组成
+- 缓存的 key 由 statementId,params,boundSql,rowBounds 组成`org.apache.ibatis.executor.BaseExecutor#createCacheKey`
+- 做增删改操作，并且提交事物会刷新一级缓存。
+- 一级缓存实际是一个 hashmap`org.apache.ibatis.cache.impl.PerpetualCache#cache`每一个 sqlsession 都有一个引用
+
+![](/images/8b136521b28faac6ac81d955e229eaaa.svg)
 
 ## 二级缓存
 
