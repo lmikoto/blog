@@ -11,7 +11,7 @@
     "server": "hexo server",
     "test": "echo 1",
     "create": "hexo new post",
-    "yuque:build": "yuque-hexo sync",
+    "yuque:build": "yuque-hexo sync && npm run image:download",
     "image:download": "node script/image-download"
   },
   "hexo": {
