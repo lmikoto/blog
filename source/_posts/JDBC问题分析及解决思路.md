@@ -36,11 +36,11 @@ resultSet = preparedStatement.executeQuery();
 
 问题
 
-- `sql`语句，设置参数存在硬编码
+- sql 语句，设置参数存在硬编码
 
 解决思路
 
-- 配置文件解决，把`sql`封装到配置文件中
+- 配置文件解决，把 sql 封装到配置文件中
 
 ```java
 while (resultSet.next()) {
