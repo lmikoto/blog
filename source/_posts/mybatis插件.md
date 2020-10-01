@@ -7,7 +7,7 @@ categories: []
 ---
 
 mybatis 的四大核心对象都提供了插件的扩展机制。对于**mybatis**来说插件就是拦截器。本质是通过动态代理实现的。
-![](/images/8c39a064cb78695c040da544c8fee785.svg)
+![](/images//images/)
 
 ## 插件原理
 
