@@ -11,7 +11,7 @@ mybatis 的四大核心对象都提供了插件的扩展机制。对于**mybatis
 
 ## 插件原理
 
-每个创建出来的对象不是直接返回的。而是 ` interceptorChain``.pluginAll ` 处理后返回的。
+每个创建出来的对象不是直接返回的。而是`org.apache.ibatis.plugin.InterceptorChain#pluginAll`处理后返回的。
 
 ```java
   public Object pluginAll(Object target) {
