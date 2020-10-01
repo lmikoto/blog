@@ -16,7 +16,7 @@ Mybatis 分为一级缓存和二级缓存
 - 做增删改操作，并且提交事物会刷新一级缓存。
 - 一级缓存实际是一个 hashmap`org.apache.ibatis.cache.impl.PerpetualCache#cache`每一个 sqlsession 都有一个引用
 
-![](/images//images/)
+![](/images/8b136521b28faac6ac81d955e229eaaa.svg)
 
 ## 二级缓存
 

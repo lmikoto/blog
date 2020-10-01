@@ -10,7 +10,12 @@ const imagePattern = /!\[(.*?)]\((.*?)\)/g;
 const getName = (url) =>{
   const start = url.lastIndexOf("\/");
   const end = url.indexOf("#");
-  return url.substring(start + 1,end);
+  if(end !== -1){
+    return url.substring(start + 1,end);
+  }else{
+    return url.substring(start + 1);
+  }
+
 }
 
 const donwload = async () => {
@@ -39,6 +44,7 @@ const donwload = async () => {
       }
 
       imageUseMap[name] = true;
+      console.log('use',name)
       newContent = newContent.replace(url,`/images/${name}`);
       fs.writeFileSync(postPath,newContent);
     }
