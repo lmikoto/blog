@@ -1503,7 +1503,7 @@
   {
     "id": 13978672,
     "slug": "icns2q",
-    "title": "bean生命周期",
+    "title": "spring bean生命周期",
     "book_id": 1840429,
     "book": {
       "id": 1840429,
@@ -1517,8 +1517,8 @@
       "items_count": 20,
       "likes_count": 0,
       "watches_count": 1,
-      "content_updated_at": "2020-10-05T03:18:29.031Z",
-      "updated_at": "2020-10-05T03:18:29.000Z",
+      "content_updated_at": "2020-10-05T03:20:39.076Z",
+      "updated_at": "2020-10-05T03:20:39.000Z",
       "created_at": "2020-09-29T12:57:45.000Z",
       "namespace": "lmikoto/lmikoto",
       "user": {
@@ -1569,8 +1569,8 @@
     "content_updated_at": "2020-10-05T03:05:04.000Z",
     "deleted_at": null,
     "created_at": "2020-10-03T02:33:38.000Z",
-    "updated_at": "2020-10-05T03:18:29.000Z",
-    "published_at": "2020-10-05T03:18:28.000Z",
+    "updated_at": "2020-10-05T03:20:39.000Z",
+    "published_at": "2020-10-05T03:20:39.000Z",
     "first_published_at": "2020-10-05T03:05:04.000Z",
     "word_count": 0,
     "cover": "https://cdn.nlark.com/yuque/__puml/c77aa2a75ba99e623da6da764180fc0c.svg",
