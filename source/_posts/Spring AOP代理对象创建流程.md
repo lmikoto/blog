@@ -30,6 +30,7 @@ public Object postProcessAfterInitialization(@Nullable Object bean, String beanN
 // 找当前的bean是否有匹配的advice
 Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 if (specificInterceptors != DO_NOT_PROXY) {
+    // 标记增强为true，表示需要增强实现
     this.advisedBeans.put(cacheKey, Boolean.TRUE);
     // 创建代理
     Object proxy = createProxy(
