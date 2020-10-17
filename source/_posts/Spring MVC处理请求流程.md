@@ -126,6 +126,8 @@ protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Ex
 }
 ```
 
+执行的过程 [https://www.yuque.com/lmikoto/lmikoto/gv5dn0](https://www.yuque.com/lmikoto/lmikoto/gv5dn0)
+
 ## getHandlerAdapter
 
 ```java
