@@ -6,4 +6,4 @@ tags: []
 categories: []
 ---
 
-![](/images/c77aa2a75ba99e623da6da764180fc0c.svg)
+![](/images/82b97b15af648eddf5667da2dd5df62e.svg)
