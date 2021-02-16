@@ -18,7 +18,7 @@
     "version": "4.2.0"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "hexo": "^4.0.0",
     "hexo-excerpt": "^1.1.4",
     "hexo-generator-archive": "^1.0.0",
