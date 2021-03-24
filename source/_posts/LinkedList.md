@@ -1,5 +1,5 @@
 ---
-title: JDK8源码-LinkedList
+title: LinkedList
 urlname: oaa1mz
 date: '2020-12-13 10:16:40 +0800'
 tags: []

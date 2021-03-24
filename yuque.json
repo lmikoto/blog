@@ -2,7 +2,7 @@
   {
     "id": 26418032,
     "slug": "chkrx0",
-    "title": "JDK8源码-LinkedHashMap",
+    "title": "LinkedHashMap",
     "book_id": 2080476,
     "book": {
       "id": 2080476,
@@ -13,11 +13,11 @@
       "description": "",
       "creator_id": 328252,
       "public": 1,
-      "items_count": 6,
+      "items_count": 7,
       "likes_count": 0,
       "watches_count": 1,
-      "content_updated_at": "2021-02-16T12:21:49.326Z",
-      "updated_at": "2021-02-16T12:22:04.000Z",
+      "content_updated_at": "2021-03-24T06:17:25.595Z",
+      "updated_at": "2021-03-24T06:17:58.000Z",
       "created_at": "2020-12-01T14:10:55.000Z",
       "namespace": "lmikoto/note",
       "user": {
@@ -32,7 +32,7 @@
         "followers_count": 0,
         "following_count": 0,
         "created_at": "2019-04-25T04:31:29.000Z",
-        "updated_at": "2020-12-30T02:19:45.000Z",
+        "updated_at": "2021-03-05T01:56:57.000Z",
         "_serializer": "v2.user"
       },
       "_serializer": "v2.book"
@@ -50,7 +50,7 @@
       "followers_count": 0,
       "following_count": 0,
       "created_at": "2019-04-25T04:31:29.000Z",
-      "updated_at": "2020-12-30T02:19:45.000Z",
+      "updated_at": "2021-03-05T01:56:57.000Z",
       "_serializer": "v2.user"
     },
     "format": "lake",
@@ -68,14 +68,14 @@
     "content_updated_at": "2021-02-16T12:21:15.000Z",
     "deleted_at": null,
     "created_at": "2020-12-25T02:40:15.000Z",
-    "updated_at": "2021-02-16T12:21:15.000Z",
-    "published_at": "2021-02-16T12:21:15.000Z",
+    "updated_at": "2021-03-24T06:17:25.000Z",
+    "published_at": "2021-03-24T06:17:25.000Z",
     "first_published_at": "2020-12-25T03:16:38.000Z",
     "word_count": 1342,
     "cover": null,
     "description": "简介继承自HashMap，实现了Map<K,V>接口，和HashMap非常相似，主要通过重写HashMap中方法的实现。内部维护一个双向链表，每次插入数据、访问、修改数据时，会增加节点或调整链表节点的顺序。允许key为null，value为null线程不安全属性LinkedHashMap内部维...",
     "custom_description": null,
-    "hits": 4,
+    "hits": 7,
     "_serializer": "v2.doc_detail"
   },
   {
@@ -160,7 +160,7 @@
   {
     "id": 23560355,
     "slug": "whrnzv",
-    "title": "JDK8源码-HashMap",
+    "title": "HashMap",
     "book_id": 2080476,
     "book": {
       "id": 2080476,
@@ -171,11 +171,11 @@
       "description": "",
       "creator_id": 328252,
       "public": 1,
-      "items_count": 6,
+      "items_count": 7,
       "likes_count": 0,
       "watches_count": 1,
-      "content_updated_at": "2021-02-16T12:21:49.326Z",
-      "updated_at": "2021-02-16T12:22:04.000Z",
+      "content_updated_at": "2021-03-24T06:17:25.595Z",
+      "updated_at": "2021-03-24T06:17:58.000Z",
       "created_at": "2020-12-01T14:10:55.000Z",
       "namespace": "lmikoto/note",
       "user": {
@@ -190,7 +190,7 @@
         "followers_count": 0,
         "following_count": 0,
         "created_at": "2019-04-25T04:31:29.000Z",
-        "updated_at": "2020-12-30T02:19:45.000Z",
+        "updated_at": "2021-03-05T01:56:57.000Z",
         "_serializer": "v2.user"
       },
       "_serializer": "v2.book"
@@ -208,7 +208,7 @@
       "followers_count": 0,
       "following_count": 0,
       "created_at": "2019-04-25T04:31:29.000Z",
-      "updated_at": "2020-12-30T02:19:45.000Z",
+      "updated_at": "2021-03-05T01:56:57.000Z",
       "_serializer": "v2.user"
     },
     "format": "lake",
@@ -226,8 +226,8 @@
     "content_updated_at": "2021-02-16T12:21:02.000Z",
     "deleted_at": null,
     "created_at": "2020-12-14T14:06:53.000Z",
-    "updated_at": "2021-02-16T12:21:02.000Z",
-    "published_at": "2021-02-16T12:21:02.000Z",
+    "updated_at": "2021-03-24T06:17:10.000Z",
+    "published_at": "2021-03-24T06:17:10.000Z",
     "first_published_at": "2020-12-14T14:10:02.000Z",
     "word_count": 4105,
     "cover": "https://cdn.nlark.com/yuque/0/2020/png/328252/1608349304876-a0798768-a5e7-4d06-8083-c1bcb51cac07.png",
@@ -239,7 +239,7 @@
   {
     "id": 23479356,
     "slug": "oaa1mz",
-    "title": "JDK8源码-LinkedList",
+    "title": "LinkedList",
     "book_id": 2080476,
     "book": {
       "id": 2080476,
@@ -250,11 +250,11 @@
       "description": "",
       "creator_id": 328252,
       "public": 1,
-      "items_count": 5,
+      "items_count": 7,
       "likes_count": 0,
       "watches_count": 1,
-      "content_updated_at": "2021-02-16T12:02:09.371Z",
-      "updated_at": "2021-02-16T12:02:09.000Z",
+      "content_updated_at": "2021-03-24T06:17:25.595Z",
+      "updated_at": "2021-03-24T06:17:58.000Z",
       "created_at": "2020-12-01T14:10:55.000Z",
       "namespace": "lmikoto/note",
       "user": {
@@ -269,7 +269,7 @@
         "followers_count": 0,
         "following_count": 0,
         "created_at": "2019-04-25T04:31:29.000Z",
-        "updated_at": "2020-12-30T02:19:45.000Z",
+        "updated_at": "2021-03-05T01:56:57.000Z",
         "_serializer": "v2.user"
       },
       "_serializer": "v2.book"
@@ -287,7 +287,7 @@
       "followers_count": 0,
       "following_count": 0,
       "created_at": "2019-04-25T04:31:29.000Z",
-      "updated_at": "2020-12-30T02:19:45.000Z",
+      "updated_at": "2021-03-05T01:56:57.000Z",
       "_serializer": "v2.user"
     },
     "format": "lake",
@@ -305,20 +305,20 @@
     "content_updated_at": "2021-02-16T11:57:54.000Z",
     "deleted_at": null,
     "created_at": "2020-12-13T02:16:40.000Z",
-    "updated_at": "2021-02-16T11:57:55.000Z",
-    "published_at": "2021-02-16T11:57:54.000Z",
+    "updated_at": "2021-03-24T06:16:35.000Z",
+    "published_at": "2021-03-24T06:16:35.000Z",
     "first_published_at": "2020-12-13T02:18:48.000Z",
     "word_count": 2664,
     "cover": "https://cdn.nlark.com/yuque/0/2020/png/328252/1607828214992-a78ea8dc-ad30-44d0-8a38-3f6b0ab2ec5b.png?x-oss-process=image%2Fresize%2Cw_1500",
     "description": "简介Linkedlist是一个继承自AbstractSequentialList的双向链表，因此可以在双端进行操作。可以被用来当作栈和队列。实现List接口可以对列表进行操作实现Deque接口，可以将Linkedlist作为双端队列使用Linkedlist实现了Cloneable接口，重写了c...",
     "custom_description": null,
-    "hits": 4,
+    "hits": 7,
     "_serializer": "v2.doc_detail"
   },
   {
     "id": 16909911,
     "slug": "iheqgv",
-    "title": "JDK8源码-ArrayList",
+    "title": "ArrayList",
     "book_id": 2080476,
     "book": {
       "id": 2080476,
@@ -329,11 +329,11 @@
       "description": "",
       "creator_id": 328252,
       "public": 1,
-      "items_count": 5,
+      "items_count": 7,
       "likes_count": 0,
       "watches_count": 1,
-      "content_updated_at": "2021-02-16T12:14:29.230Z",
-      "updated_at": "2021-02-16T12:14:29.000Z",
+      "content_updated_at": "2021-03-24T06:17:25.595Z",
+      "updated_at": "2021-03-24T06:17:58.000Z",
       "created_at": "2020-12-01T14:10:55.000Z",
       "namespace": "lmikoto/note",
       "user": {
@@ -348,7 +348,7 @@
         "followers_count": 0,
         "following_count": 0,
         "created_at": "2019-04-25T04:31:29.000Z",
-        "updated_at": "2020-12-30T02:19:45.000Z",
+        "updated_at": "2021-03-05T01:56:57.000Z",
         "_serializer": "v2.user"
       },
       "_serializer": "v2.book"
@@ -366,7 +366,7 @@
       "followers_count": 0,
       "following_count": 0,
       "created_at": "2019-04-25T04:31:29.000Z",
-      "updated_at": "2020-12-30T02:19:45.000Z",
+      "updated_at": "2021-03-05T01:56:57.000Z",
       "_serializer": "v2.user"
     },
     "format": "lake",
@@ -384,14 +384,14 @@
     "content_updated_at": "2021-02-16T12:14:29.000Z",
     "deleted_at": null,
     "created_at": "2020-12-03T16:05:14.000Z",
-    "updated_at": "2021-02-16T12:14:29.000Z",
-    "published_at": "2021-02-16T12:14:29.000Z",
+    "updated_at": "2021-03-24T06:16:48.000Z",
+    "published_at": "2021-03-24T06:16:48.000Z",
     "first_published_at": "2020-12-12T03:31:17.000Z",
     "word_count": 2704,
     "cover": null,
     "description": "ArrayList是一个动态数组，其容量可以动态增长。简介ArrayList继承了AbstractList，实现了List。他是一个数组队列，提供了增加、删除、修改、继承、遍历等功能。ArrayList实现了RandmoAccess接口，提供了随机访问的能力。ArrayList实现了Clone...",
     "custom_description": null,
-    "hits": 0,
+    "hits": 6,
     "_serializer": "v2.doc_detail"
   },
   {
